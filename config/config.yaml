@@ -19,3 +19,10 @@ timezone: "Asia/Kolkata"
 # API retry settings
 api_retry_attempts: 3
 api_timeout_seconds: 5
+
+# Stock-specific settings (optional per-stock thresholds)
+# Format: SYMBOL.NS: threshold_percent
+stock_thresholds: {}
+  # Example:
+  # TCS.NS: 3.0
+  # RELIANCE.NS: 7.0

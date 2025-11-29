@@ -14,14 +14,16 @@ init(autoreset=True)
 class AlertSystem:
     """Handles alerts and logging"""
 
-    def __init__(self, config):
+    def __init__(self, config, stock_config=None):
         """
         Initialize alert system
 
         Args:
             config: Configuration dictionary
+            stock_config: StockConfig instance for per-stock settings
         """
         self.config = config
+        self.stock_config = stock_config
         self.threshold = config.get('threshold_percent', 5.0)
         self.cooldown_minutes = config.get('alert_cooldown_minutes', 30)
         self.alerts_file = Path(__file__).parent.parent / "data" / "alerts_history.json"
@@ -38,8 +40,14 @@ class AlertSystem:
         Returns:
             bool: True if alert should be triggered
         """
+        # Get threshold for this stock (per-stock or default)
+        if self.stock_config:
+            threshold = self.stock_config.get_threshold(symbol)
+        else:
+            threshold = self.threshold
+
         # Check if absolute percentage exceeds threshold
-        if abs(percentage_change) < self.threshold:
+        if abs(percentage_change) < threshold:
             return False
 
         # Check cooldown period
