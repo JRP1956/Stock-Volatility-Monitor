@@ -1,0 +1,21 @@
+# Stock Volatility Monitor Configuration
+
+# Volatility threshold percentage for alerts
+threshold_percent: 5.0
+
+# Price check frequency in minutes
+check_interval_minutes: 5
+
+# NSE market hours (IST)
+market_open_time: "09:15"
+market_close_time: "15:30"
+
+# Minimum time between repeat alerts for the same stock (minutes)
+alert_cooldown_minutes: 30
+
+# Timezone
+timezone: "Asia/Kolkata"
+
+# API retry settings
+api_retry_attempts: 3
+api_timeout_seconds: 5
